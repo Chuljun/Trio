@@ -184,16 +184,17 @@ jobs:
           submodules: recursive
           ref: ${{ env.TARGET_BRANCH }}
 
-      # Customize Trio: Use patches or download and apply patches from GitHub
+# Customize Trio: Use patches or download and apply patches from GitHub
       - name: Customize Trio
         run: |
-
+          # Point to the most recent SHA for OmniBLE branch pod-keep-alive
+          git update-index --cacheinfo 160000 2299291f834aa0c6683454dc18d494979d97c545 "OmniBLE"
+          git submodule update
           # Trio workspace patches
           # -applies any patches located in the Trio/patches/ directory
           if $(ls ./patches/* &> /dev/null); then
-          git apply ./patches/* --allow-empty -v --whitespace=fix
+            git apply ./patches/* --allow-empty -v --whitespace=fix
           fi
-
           # Download and apply Trio patches from GitHub:
           # Template for customizing Trio code (as opposed to submodule code)
           # Remove the "#" sign from the beginning of the line below to activate
