@@ -187,9 +187,6 @@ jobs:
 # Customize Trio: Use patches or download and apply patches from GitHub
       - name: Customize Trio
         run: |
-          # Point to the most recent SHA for OmniBLE branch pod-keep-alive
-          git update-index --cacheinfo 160000 2299291f834aa0c6683454dc18d494979d97c545 "OmniBLE"
-          git submodule update
           # Trio workspace patches
           # -applies any patches located in the Trio/patches/ directory
           if $(ls ./patches/* &> /dev/null); then
